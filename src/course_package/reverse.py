@@ -1,4 +1,13 @@
-def reverse_list(lst):
-    assert isinstance(lst, list), f"{type(lst)} is not of type 'list'"
+def reverse_list(list_to_reverse: list) -> list:
+    """Function to reverse a list
 
-    return lst[::-1]
+    Parameters
+    ----------
+    lst : list to reverse
+
+    Returns
+    -------
+    input list, but reversed
+    """
+    reversed_list = list_to_reverse[::-1]
+    return reversed_list

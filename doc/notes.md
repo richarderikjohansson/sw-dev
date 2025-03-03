@@ -1,8 +1,28 @@
-# Document containing various notes
+# Notes on lectures and homework assignments 
 
 ## Lectures notes 
 
-## Homework assignment: Development enivironment
+## Homework assignment 0: Development environment
+
+**Install git**
+1. If git is not installed on your system (try git --version), install it (remember to always favor your package manager) and create a new repository for homework solutions.
+2. If you want - upload the repo on codeberg, github, or gitlab.
+**Virtual environments**
+1. Choose a method to manage virtual environments and implement it, write a cheat sheet for creating, entering, exiting and deleting environments.
+**Editor mastery**
+1. Go trough the shortcuts that your chosen editors has, create a short cheat sheet for the shortcuts that you think are the most useful!
+
+
+## Homework assignment 1: Motivation
+
+**Software inventory**
+Create a list of:
+1. Code that you depend on and use and why
+2. Code that you have written, what it is and how its used 
+3. Code you are going to write, what it is and who will use it
+
+
+## Homework assignment 2: Programming
 
 1. Create a small python package. 
 2. Install your package into your virtual environment.
@@ -23,28 +43,4 @@
    Implement one of the [https://matplotlib.org/stable/gallery/lines_bars_and_markers/fill_between_alpha.html#sphx-glr-gallery-lines-bars-and-markers-fill-between-alpha-py](examples).
    Run the code and get the plot to show.
 
-### notes
-
-Installed *course_package* with setup.py and pip. It is working greatly. 
-Maybe write a bash script to install environment and also install 
-*course_package* within this environment.
-
-The two functions were created in two different modules and could successfully
-be imported both within the package, and also outside this package. The reverse
-list function manipulates the list in place with:
-
-```python
-lst[::-1]
-```
-The second function import this function and reverse the first list. I then kept 
-it simple by looping through the two lists with `zip()` and appending a new list 
-with the lists method. Very easy and maybe not the fastest and most reliable thing 
-to do this since the lists must be of equal length.
-
-Created two functions, one to write a string to a binary file, and one to read a binary file.
-The string is encoded with utf-8 encoding by default.
-
-
 ## Miscellaneous notes
-
-

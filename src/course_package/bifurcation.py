@@ -69,12 +69,6 @@ def animate_map(points: int, iterations: int) -> None:
     points : number of points that the map should go through for x and r
     iterations : number of iterations that the map should perform for x and r
     """
-    X = []
-    R = []
-    for iteration in range(iterations):
-        r, x = make_logistic_map(points=points, iterations=iteration)
-        R.append(r)
-        X.append(x)
 
     fig, ax = plt.subplots(figsize=(10, 10))
     (line,) = ax.plot([], [], ls="", marker=",", color="black", alpha=0.1)
@@ -85,13 +79,12 @@ def animate_map(points: int, iterations: int) -> None:
     ax.spines[["right", "top"]].set_visible(False)
 
     def update(frame):
-        # skip for n = 0
-        if frame > 0:
-            line.set_data(R[frame], X[frame])
-            equation = r"$x_{n+1} = rx_{n}(1-x_{n})$, "
-            counter = f"for n={frame}"
-            line.set_label(equation + counter)
-            ax.legend(loc="upper left", frameon=False)
+        r, x = make_logistic_map(points=points, iterations=frame)
+        line.set_data(r, x)
+        equation = r"$x_{n+1} = rx_{n}(1-x_{n})$, "
+        counter = f"for n={frame}"
+        line.set_label(equation + counter)
+        ax.legend(loc="upper left", frameon=False)
         return (line,)
 
     ani = animation.FuncAnimation(fig, update, frames=iterations, interval=50)

@@ -37,66 +37,15 @@ With the first command you activate a environment called *my_env*, which has to 
 installed environments. The second command you deactivate the environment return you to the *base*
 environment.
 
-## Editor shortcuts, etc.
+## Editor shortcuts
 
 My workflow when coding actually relay on more than only editor shortcuts. On my personal system I
 mainly work with tiling window managers, such as *i3* or *hyprland* on Arch linux, btw (xD). I pair
-this with *tmux* and *neovim* to control most of what I want to do to my keybord. However on my work
+this with *tmux* and *neovim* to control most of what I want to do to my keyboard. However on my work
 system I use a MacBook Air, but there are applications that you can install to make the system work
 as an tiling window manager. I use a application called *Aerospace* and it can be configured to
-work similar to i3.
+work similar to i3. which I will talk more about in Homework assignment 3
 
-### Aerospace
-
-I usually only have dedicated applications on single workspaces. I have two separate terminal
-windows in workspace 1 and 2, on for a terminal locally and one terminal that I am connected to a
-remote sever via ssh. On workspace 3 I usually have a browser opened, so I easily can browse for
-example code documentation. Workspace 5 is dedicated to communication so on this I have my email
-application and Slack opened and on workspace 6 I usually have Spotify opened. See below how I
-switch between the workspaces:
-
-* `super+1` $\rightarrow$ Local terminal
-* `super+2` $\rightarrow$ Remote terminal
-* `super+3` $\rightarrow$ Browser
-* `super+5` $\rightarrow$ Communication 
-* `super+6` $\rightarrow$ Spotify 
-
-### Tmux
-
-[Tmux](https://github.com/tmux/tmux/wiki) is a terminal multiplexer, meaning that you can have several terminal instances within one
-single terminal in different panes and windows. I am probably not using the full power of this
-awesome tool, but how I work with it works very good for the work I do. I usually try to keep it as
-clean as possible with maybe 2 active windows and usually just one pane within each window. Tmux
-have a multitude of available plugins to choose from, and the one I use for workflow is
-[Vim-Navigaton](https://github.com/christoomey/vim-tmux-navigator) which enables me to navigate the
-panes I have within tmux using vim movement, without the need of using the original prefix `Ctrl+b`.
-Below is the majority of the shortcuts I use:
-
-* `Ctrl + "` $\rightarrow$ Create a new horizontal pane
-* `Ctrl + %` $\rightarrow$ Create a new vertical pane
-* `Ctrl + l` $\rightarrow$ Move to the pane right of the active one
-* `Ctrl + h` $\rightarrow$ Move to the pane left of the active one
-* `Ctrl + k` $\rightarrow$ Move to the pane above of the active one
-* `Ctrl + j` $\rightarrow$ Move to the pane below of the active one
-* `Ctrl + b + c` $\rightarrow$ Create a new window 
-* `Ctrl + b + ,` $\rightarrow$ Rename window
-* `Ctrl + b + w` $\rightarrow$ Get a list of widows which I can navigate and choose from 
-* `Ctrl + b + l` $\rightarrow$ Select previous window
-* `Ctrl + b + $` $\rightarrow$ Prompt to rename the current session
-
-One really nice feature of tmux is that you can also detach your tmux session, meaning that
-whatever process you have running in that tmux session can be run only within tmux. I use this when
-running really time consuming scripts, for example when I run my retrievals. I usually do this on a
-dedicated server I use for these calculations over ssh. So I can start the retrieval with in a local
-tmux session on the server. I can then detach that session on the server and then log out from the
-ssh. This ensures that the process is continuing locally on the server within tmux and I do not
-longer have to be connected to it from my local system. I detach and attach a session with the below
-shortcuts and commands:
-
-* `Ctrl + b + d` $\rightarrow$ Detach session
-* `tmux ls` $\rightarrow$ List tmux sessions
-* `tmux ls` $\rightarrow$ List tmux sessions
-* `tmux attach-sessions -t session_name` $\rightarrow$ Attach session with the name *session_name*
 
 ### Neovim
 
@@ -163,13 +112,3 @@ fuzzy search to find files. See below for shortcuts
 * `Leader Leader` $\rightarrow$ Opens up a list with previous opened files with a preview og the
 content
 * `Ctrl + p` $\rightarrow$ Lists all the files in the current working directory
-
-
-### Conclusion
-
-The workflow system I work with currently work pretty good for me. There is always new things In
-learn about the system I use (especially) in nvim. I find new glugins all the time that enhances my
-experience and I find new ways of doing things in nvim all the time. I have heard that people that
-worked with vim and neovim for 10-20 years all still learn new stuff. So it is a continuous learning
-working with nvim.
-

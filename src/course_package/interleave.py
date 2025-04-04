@@ -1,24 +1,29 @@
-from course_package.reverse import reverse_list
+def reverse_list(list_to_reverse: list) -> list:
+    """Reverse a list
+
+    Args:
+        list_to_reverse: List to reverse
+
+    Returns:
+        Reversed list
+    """
+    reversed_list = list_to_reverse[::-1]
+    return reversed_list
 
 
 def interleave_two_lists(list1: list, list2: list) -> list:
-    """
-    Function that takes two inputs as lists, reverses the first list and
-    then interleaves every other element from the two lists and combines
-    them into a new list
+    """Interleave two lists
 
-    Parameters
-    ----------
-    list1 : list that should be reversed
-    list2 : the second list that not will be reversed
+    Args:
+        list1: List to reverse
+        list2: Other list
 
-    Returns
-    -------
-    new_list : Interleaved list from list1 and list2
+    Returns:
+        List with interleaved from the two lists
     """
 
     reversed_list = reverse_list(list1)
-    new_list = []
+    new_list = [str]
 
     for pair in zip(reversed_list, list2):
         new_list.extend(pair)

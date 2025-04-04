@@ -4,28 +4,29 @@ import numpy as np
 
 
 def logistic_equation(x: float, r: float) -> float:
-    """Function to calculates the logistic map
+    """Calculates the logistic equation
 
-    Parameters
-    ----------
-    x : the seed for the map
-    r : the anchor for the map
 
-    Returns
-    -------
-    xn : map value
+    Args:
+        x: Seed for the logistic equation
+        r: Anchor for the logistic equation
+
+    Returns:
+        Updated seed
     """
     xn = r * x * (1 - x)
     return xn
 
 
 def make_logistic_map(points: int, iterations: int) -> tuple:
-    """Function to return anchors and map value
+    """Updates the map
 
-    Parameters
-    ----------
-    points : numbers of points that the map should go through for x and r
-    iterations : number of iterations that the map should perform for x and r
+    Args:
+        points: number of points for the seed and anchor
+        iterations: Number of times the map should be updated
+
+    Returns:
+        Updated values for the anchor and seed
     """
     r = np.linspace(0, 4, points)
     x = np.random.rand(points)
@@ -36,12 +37,11 @@ def make_logistic_map(points: int, iterations: int) -> tuple:
 
 
 def plot_map(points: int, iterations: int) -> None:
-    """Function to plot the map for a certain number of points and iterations
+    """Plotting the logistic map
 
-    Parameters
-    ----------
-    points : numbers of points that the map should go through for x and r
-    iterations : number of iterations that the map should perform for x and r
+    Args:
+        points: Numbers of points for the seed and anchor
+        iterations: Number of times the map should be updated
     """
     r, x = make_logistic_map(points=points, iterations=iterations)
     equation = r"$x_{n+1} = rx_{n}(1-x_{n})$, "
@@ -59,15 +59,12 @@ def plot_map(points: int, iterations: int) -> None:
 
 
 def animate_map(points: int, iterations: int) -> None:
-    """Function to animate the map for a certain number of points and iterations
+    """Animate the logistic map
 
-    This function will animate the map from the first iteration to the end of the
-    iterations and create an .gif
 
-    Parameters
-    ----------
-    points : number of points that the map should go through for x and r
-    iterations : number of iterations that the map should perform for x and r
+    Args:
+        points: Number of points for the seed and anchor
+        iterations: Number of times the map should be updated
     """
 
     fig, ax = plt.subplots(figsize=(10, 10))

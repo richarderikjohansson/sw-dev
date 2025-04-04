@@ -22,7 +22,7 @@ requests library where I fetch data from various targets.
 our server where we save the raw data from our radiometers. It is still under development, but the
 main function of it is to read raw data from the measurement and place it in more manageable format.
 Where I have chosen in .hdf5 format. It also relays on a module I have written to fetch the
-temperature from IRF's weather station at the start of the measurement
+temperature from IRF's weather station at the start of the measurement. 
 
 * [magscrape](https://gitlab.irf.se/richardj/magscrape), A module that I created to fetch data from
   IRF's magnometers in various time periods. Also under development
@@ -30,7 +30,11 @@ temperature from IRF's weather station at the start of the measurement
 * [KIMRA/ARTS](https://gitlab.irf.se/kimra/ARTS), Code I started writing right away when I started
 my Ph.D. where I mainly use PyARTS for various calculations, such as inversions from our
 measurements. This is very much an unfinished product and I will work with it throughout my current
-position.
+position. 
+
+This codebase is still in use, however I am developing a new codebase that will replace this one
+since I feel like it can be a lot easier to use. This will also combine for example dbase and
+magscrape into one library.
 
 ## Code I am going to write
 
@@ -39,6 +43,10 @@ later stage merge all these smaller repositories into a larger one that can hand
 from each. This since they are all related to my current work. The goal when I end my Ph.D. is that
 everything will be automated, all the way from parsing the raw data files to visualizing the
 retrieval data at some internet endpoint.
+
+* The scope of my current project have slightly pivoted since one large part of the project seems
+not possible to do from a physical standpoint. Therefore will I delve into applying AI methods to
+make inversion emulators. So I will build this.
 
 * I am also quite interested in learning lua to develop plugins for nvim
 * I also want to become better att low level stuff such as C++ and Rust to deal with low level

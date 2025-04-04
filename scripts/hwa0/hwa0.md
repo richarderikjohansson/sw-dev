@@ -90,7 +90,7 @@ and replaces foo with bar
 
 To save and quit nvim you do this from commands, which is opened with `:`
 
-* `w` $\rightarrow$ Write to file
+* `w` \(\rightarrow\) Write to file
 * `wa` $\rightarrow$ Write to all files in all buffers
 * `wqa` $\rightarrow$ Write to all files in all buffers and quit nvim
 

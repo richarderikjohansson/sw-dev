@@ -1,7 +1,7 @@
 # Notes
 
 As the instructions read I created a function that calculated $x_{n+1}$
-for a given $x$ and $r$ in $x_{n+1}=rx_{n}(1-x_{n})$ and are defined as `logistic_equation` 
+for a given \(x\) and \(r\) in \(x_{n+1}=rx_{n}(1-x_{n})\) and are defined as `logistic_equation` 
 in the *bifurcation* module. The iterative part took some to to wrap my head around how to 
 solve this. As any developerdo, I took some inspiration from stackoverflow. Reading some 
 code where people have done similar things I finally managed to come up with a solution.

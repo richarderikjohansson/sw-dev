@@ -1,0 +1,26 @@
+site_name: Software Development Notes 
+nav:
+  - Home: index.md
+  - Homeworks: 
+    - Assignment 0: Homework/hwa0.md
+    - Assignment 1: Homework/hwa1.md
+    - Assignment 2: Homework/hwa2.md
+    - Assignment 3: Homework/hwa3.md
+    - Assignment 4: Homework/hwa4.md
+    - Assignment 5: Homework/hwa5.md
+
+theme: material
+plugins:
+  - mkdocstrings
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+markdown_extensions:
+  - mdx_math
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

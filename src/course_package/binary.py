@@ -2,12 +2,11 @@ import os
 
 
 def write_binary(filename: str, string: str) -> None:
-    """Function that write a 'utf-8' encoded string to a binary file.
+    """Write content to binary file
 
-    Parameters
-    ----------
-    filename : filename of the binary file we want to write the string to
-    string : string to encode and write to filename
+    Args:
+        filename: name of the file
+        string: content to write
     """
     if not filename.endswith("bin"):
         filename = filename + ".bin"
@@ -21,15 +20,13 @@ def write_binary(filename: str, string: str) -> None:
 
 
 def read_binary(filename: str) -> str:
-    """Function to read the content from a binary file with 'utf-8' encoded string.
+    """Read from binary file
 
-    Parameters
-    ----------
-    filename : path to the file that should be read
+    Args:
+        filename: file name
 
-    Returns
-    -------
-    string : decoded string from filename
+    Returns:
+        Content from file
     """
 
     with open(filename, "rb") as file:

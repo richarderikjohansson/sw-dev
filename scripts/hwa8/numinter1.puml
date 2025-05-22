@@ -1,0 +1,17 @@
+@startuml numinter1
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/python.puml
+!include DEVICONS/terminal.puml
+!include FONTAWESOME/users.puml
+
+SHOW_PERSON_OUTLINE()
+
+Person(user, "User", "Person using a terminal")
+System(system, "numinter", "Numerical Integrator")
+Rel(user, system, "Uses", "Command Line")
+Rel_L(system, user, "Plot",)
+
+SHOW_FLOATING_LEGEND()
+@enduml

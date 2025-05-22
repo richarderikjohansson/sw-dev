@@ -1,48 +1,49 @@
 from pathlib import Path
 import hashlib
 from collections import defaultdict
-from typing import Callable
+from typing import Callable, Generator, List
 import os
 
 
-def find_files(base_dir: str, pattern: str) -> Path:
-    """Function to find paths from base directory with pattern
+def find_files(base_dir: str, pattern: str) -> Generator:
+    """Find files
 
-    Parameters
-    ----------
-    base_dir: directory where search start
-    pattern: pattern to include
+    Args:
+        base_dir: Base directory
+        pattern: Pattern to look for
+
+    Returns:
+        Path to files
     """
     return Path(base_dir).rglob(pattern)
 
 
-def save_duplicates(lists_of_files: list, filename: str) -> None:
-    """Function to save list of files to file
+def save_duplicates(files_list: Generator, filename: str) -> None:
+    """Save duplicate files
 
-    Parameters
-    ----------
-    lists_of_files: the lists of files containing duplicate content
-    filename: name of the file to be created
+    Args:
+        lists_of_files: List of files
+        filename: File name
     """
     if not os.path.exists("duplicates"):
         os.makedirs("duplicates")
     path = Path("duplicates") / filename
 
     with open(path, "w") as fh:
-        for files in lists_of_files:
+        for files in files_list:
             fh.writelines(str(files) + "\n")
 
 
-def duplicates(base_dir: str = None, pattern: str = None, save: bool = False) -> list:
-    """Function to find files with duplicate content
+def duplicates(base_dir: str, pattern: str, save: bool = False) -> Generator:
+    """Find duplicate files from the full content
 
-    A method to find files containing duplicate content using a dictionary
+    Args:
+        base_dir: [TODO:description]
+        pattern: [TODO:description]
+        save: [TODO:description]
 
-    Parameters
-    ----------
-    base_dir: directory where search start
-    pattern: pattern to include
-    save: boolean deciding if saving to file
+    Returns:
+        List of duplicate files
     """
     files = find_files(base_dir, pattern)
     dictionary = defaultdict(list)
@@ -57,19 +58,18 @@ def duplicates(base_dir: str = None, pattern: str = None, save: bool = False) ->
 
 
 def duplicate_with_hashing(
-    base_dir: str = None, pattern: str = None, hash_func: Callable = None, save=False
-) -> list:
-    """Function to find files with duplicate content
+    base_dir: str, pattern: str, hash_func: Callable, save: bool = False
+) -> Generator:
+    """Wrapper to apply hashing to find duplicate
 
-    A method to find files containing duplicate content using a dictionary
-    and hashing the content
+    Args:
+        base_dir: base directory
+        pattern: pattern to look for
+        hash_func: hash function
+        save : bool if saving files
 
-    Parameters
-    ----------
-    base_dir: directory where search start
-    pattern: pattern to include
-    function: which hashing function to use
-    save: boolean deciding if saving to file
+    Returns:
+        Files
     """
     files = find_files(base_dir, pattern)
     dictionary = defaultdict(list)
@@ -87,18 +87,13 @@ def duplicate_with_hashing(
 
 
 def sha256_chunks(path: Path) -> str:
-    """Function to hash the content
+    """sha256 hash in 4kB chunks
 
-    This function uses the sha256 hasing algorithm
-    and the content is hashed in 4kB chunks
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Digest from hash
     """
     hasher = hashlib.sha256()
     with open(path, "rb") as file:
@@ -110,38 +105,26 @@ def sha256_chunks(path: Path) -> str:
 
 
 def sha256_filedigest(path: Path) -> str:
-    """Function to hash content
+    """sha256 hash
 
-    This function uses the sha256 hashing algorithm
-    and uses hashlibs file_digest function to handle
-    the hasing
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Digest from file
     """
     with open(path, "rb") as file:
         return hashlib.file_digest(file, "sha256").hexdigest()
 
 
-def sha256_path(path):
-    """Function to hash content
+def sha256_path(path: Path) -> str:
+    """sha256 hash
 
-    This function uses the sha256 hashing algorithm
-    and updates the hasher with content read from Path
-    objects method read_text
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Digest from file
     """
     hasher = hashlib.sha256()
     bstr = path.read_text().encode("utf-8")
@@ -149,20 +132,14 @@ def sha256_path(path):
     return hasher.hexdigest()
 
 
-def md5_path(path):
-    """Function to hash content
+def md5_path(path: Path) -> str:
+    """md5 hash
 
-    This : Callablefunction uses the md5 hashing algorithm
-    and updates the hasher with content read from Path
-    objects method read_text
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Digest of file
     """
     hasher = hashlib.md5()
     bstr = path.read_text().encode("utf-8")
@@ -170,20 +147,14 @@ def md5_path(path):
     return hasher.hexdigest()
 
 
-def blake2b_path(path):
-    """Function to hash content
+def blake2b_path(path: Path) -> str:
+    """blake2b hash
 
-    This function uses the blake2b hashing algorithm
-    and updates the hasher with content read from Path
-    objects method read_text
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Disest of file
     """
     hasher = hashlib.blake2b()
     bstr = path.read_text().encode("utf-8")
@@ -191,20 +162,14 @@ def blake2b_path(path):
     return hasher.hexdigest()
 
 
-def blake2s_path(path):
-    """Function to hash content
+def blake2s_path(path: Path) -> str:
+    """blake2s hash
 
-    This function uses the blake2s hashing algorithm
-    and updates the hasher with content read from Path
-    objects method read_text
+    Args:
+        path: Path to file
 
-    Parameters
-    ----------
-    path: path object to the file
-
-    Returns
-    -------
-    : hashed content
+    Returns:
+        Digest of file
     """
     hasher = hashlib.blake2s()
     bstr = path.read_text().encode("utf-8")

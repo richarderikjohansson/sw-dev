@@ -8,10 +8,25 @@ nav:
     - Assignment 3: Homework/hwa3.md
     - Assignment 4: Homework/hwa4.md
     - Assignment 5: Homework/hwa5.md
+    - Assignment 6: Homework/hwa6.md
+  - API Reference: 
+    - bifurcation: API/bifurcation.md
+    - binary: API/binary.md
+    - files: API/files.md
+    - interleave: API/interleave.md
 
 theme: material
 plugins:
-  - mkdocstrings
+  - mkdocstrings:
+      handlers:
+          python:
+            options:
+              docstring_style: google 
+              docstring_section_style: table
+              show_docstring_functions: true
+              show_docstring_modules: true
+              show_docstring_description: false 
+
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML

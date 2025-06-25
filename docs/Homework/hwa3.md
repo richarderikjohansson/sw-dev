@@ -99,3 +99,139 @@ instead can use some built in functionality. What I learn when watching the some
 seen in the handout is that I will now incorporate `w`, `b` and `f` much more. With `w` you jump
 forward a word and with `b` you jump backward. `f` is used with the addition with the character you
 want to jump forward to.
+
+### Find duplicates
+
+In this exercise Daniel wrote a script to randomize files in folders with text in them.
+This code can be seen below
+
+```python
+from pathlib import Path
+import random
+
+TARGET = Path(".") / "a_few_files"
+FILES_N = 69
+random.seed(323847)
+
+content = [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+]
+
+file_content = [
+    "\n".join(random.sample(content, k=2))
+    for ind in range(FILES_N)
+]
+filenames = [
+    f"{ind}_{ind % 3}.txt"
+    for ind in range(FILES_N)
+]
+
+if __name__ == "__main__":
+    if TARGET.is_file():
+        raise FileExistsError(f"{TARGET=} already exists as a file")
+    TARGET.mkdir(exist_ok=True)
+
+    for fname, content in zip(filenames, file_content):
+        file = TARGET / fname
+        with open(file, "w") as fh:
+            fh.write(content)
+```
+
+I solved this problem using a pretty common approach for a problem of this 
+character, using maps to identify the duplicates. For this I first used a 
+naive approach comparing the content in the files with each other seen below
+in the function `duplicates`. But first I need to present the helper functions
+`find_files` and `save_duplicates`:
+
+
+My second approach was to hash all the content in the files, using various hashing 
+algorithms and then compare the hashes with each other to find duplicate files. 
+A much more reliable, but also fast way to solve this problem. I wrote a wrapper 
+function called `duplicates_with_hashing` I call this wrapper from a easy cli 
+seen below:
+
+```python
+PATH = "a_few_files"
+PATTERN = "*.txt"
+DESC_MAP = {
+    "nohash": "Find duplicates without hashing content",
+    "sha256_fd": "Find duplicates using hashed content with sha256 and digest file directly",
+    "sha256_chunks": "Find duplicates using hashed content with sha256 in 4kB chunks",
+    "sha256": "Find duplicates using hashed content with sha256 from Path object",
+    "md5": "Find duplicates using hashed content with md5 from Path object",
+    "blake2b": "Find duplicates using hashed content with blake2b from Path object",
+    "blake2s": "Find duplicates using hashed content with blake2s from Path object",
+}
+FUNCTION_MAP = {
+    "nohash": duplicates,
+    "sha256_fd": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=sha256_filedigest, save=save
+    ),
+    "sha256_chunks": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=sha256_chunks, save=save
+    ),
+    "sha256": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=sha256_path, save=save
+    ),
+    "md5": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=md5_path, save=save
+    ),
+    "blake2b": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=blake2b_path, save=save
+    ),
+    "blake2s": lambda save: duplicate_with_hashing(
+        PATH, PATTERN, hash_func=blake2s_path, save=save
+    ),
+}
+
+
+def main():
+    save_desc = "Saves the files found with name of the first argument"
+    time_desc = "Times the execution of the function"
+    print_desc = "Prints the duplicate files to stdout"
+    description = "Program to find files with duplicate content"
+    parser = argparse.ArgumentParser(add_help=True, description=description)
+    subparsers = parser.add_subparsers(
+        dest="method", required=True, help="Methods available"
+    )
+
+    for method in FUNCTION_MAP.keys():
+        description = DESC_MAP.get(method, "")
+        subparser = subparsers.add_parser(
+            method, help=description, description=description
+        )
+        subparser.add_argument("-s", "--save", action="store_true", help=save_desc)
+        subparser.add_argument("-t", "--timeit", action="store_true", help=time_desc)
+        subparser.add_argument("-p", "--printit", action="store_true", help=print_desc)
+
+    args = parser.parse_args()
+    func = FUNCTION_MAP[args.method]
+
+    if args.method == "nohash":
+        st_ex = time.time()
+        dupes = func(PATH, PATTERN, args.save)
+        execution_time = time.time() - st_ex
+    else:
+        st_ex = time.time()
+        dupes = func(save=args.save)
+        execution_time = time.time() - st_ex
+
+    if args.timeit:
+        print(f"Execution time: {execution_time} s")
+
+    if args.printit:
+        for files in dupes:
+            print(files)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+All the source code for the functions mentioned here can seen in the `files`
+module
+
+::: src.course_package.files

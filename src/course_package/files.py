@@ -38,9 +38,9 @@ def duplicates(base_dir: str, pattern: str, save: bool = False) -> Generator:
     """Find duplicate files from the full content
 
     Args:
-        base_dir: [TODO:description]
-        pattern: [TODO:description]
-        save: [TODO:description]
+        base_dir: base directory to search from
+        pattern: pattern to look for in the directory
+        save: boolean if it should be saved
 
     Returns:
         List of duplicate files

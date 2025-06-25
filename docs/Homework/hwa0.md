@@ -112,3 +112,8 @@ fuzzy search to find files. See below for shortcuts
 * `Leader Leader` &rarr, Opens up a list with previous opened files with a preview og the
 content
 * `Ctrl + p` &rarr; Lists all the files in the current working directory
+
+## Update 
+
+Since this course I started using *uv* exclusively when working with Python projects,
+except when working with PyARTS, since it requires me to install via conda.

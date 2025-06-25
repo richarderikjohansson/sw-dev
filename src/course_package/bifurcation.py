@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
+from line_profiler import profile 
+from numpy import ndarray
 
 
-def logistic_equation(x: float, r: float) -> float:
+def logistic_equation(x: ndarray, r: ndarray) -> ndarray:
     """Calculates the logistic equation
 
 
@@ -36,7 +38,7 @@ def make_logistic_map(points: int, iterations: int) -> tuple:
     return r, x
 
 
-def plot_map(points: int, iterations: int) -> None:
+def plot_map(points: int, iterations: int, clib=bool) -> None:
     """Plotting the logistic map
 
     Args:
@@ -85,6 +87,7 @@ def animate_map(points: int, iterations: int) -> None:
         return (line,)
 
     ani = animation.FuncAnimation(fig, update, frames=iterations, interval=50)
-    ani.save(
-        "logistic_map_animation.gif", writer=animation.PillowWriter(fps=15), dpi=200
-    )
+
+#    ani.save(
+#        "logistic_map_animation.gif", writer=animation.PillowWriter(fps=15), dpi=200
+#    )

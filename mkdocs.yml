@@ -19,6 +19,8 @@ nav:
     - binary: API/binary.md
     - files: API/files.md
     - interleave: API/interleave.md
+    - calculator: API/calculator.md
+
 
 theme: material
 plugins:
